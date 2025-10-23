@@ -1,0 +1,36 @@
+services:
+  postgres:
+    container_name: postgres-sql
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: learning
+      PGDATA: /postgresql/data
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/postgresql/data
+    networks:
+      - online-learning-net
+    restart: unless-stopped
+
+  redis:
+    container_name: redis-caching
+    image: 'redis:latest'
+    command: [ "redis-server", "--requirepass", "admin" ]
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - online-learning-net
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  online-learning-net:
+    driver: bridge

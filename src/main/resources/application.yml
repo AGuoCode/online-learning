@@ -1,0 +1,19 @@
+#APP
+spring:
+  profiles:
+    active: dev
+
+  mvc:
+    servlet:
+      path: /api/v1
+
+#SERVER
+server:
+  port: 8080
+
+#SPRINGDOCS
+springdoc:
+  api-docs:
+    enabled: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
