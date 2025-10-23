@@ -1,6 +1,6 @@
 package com.guai.onlinelearning.auth;
 
-import com.guai.onlinelearning.common.ApiResponse;
+import com.guai.onlinelearning.common.OperationResponse;
 import com.guai.onlinelearning.exception.StatusCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +18,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<ApiResponse> login(@RequestBody @Valid AuthRequest authRequest) {
+    public ResponseEntity<OperationResponse> login(@RequestBody @Valid AuthRequest authRequest) {
         return ResponseEntity.status(200).body(
-                ApiResponse.buildSuccessResponse(
+                OperationResponse.buildSuccessResponse(
                         StatusCode.SUCCESS,
                         "Login Successful",
                         authService.login(authRequest),
