@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -101,6 +102,19 @@ public class GlobalExceptionHandler {
                 .body(buildErrorResponse(
                                 StatusCode.INTERNAL_SERVER_ERROR,
                                 null,
+                                ex.getMessage(),
+                                null
+                        )
+                );
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ErrorResponse> handleException(HttpRequestMethodNotSupportedException ex) {
+        return ResponseEntity
+                .status(HttpStatus.METHOD_NOT_ALLOWED)
+                .body(buildErrorResponse(
+                                StatusCode.METHOD_NOT_ALLOWED,
+                                "Invalid Method Input",
                                 ex.getMessage(),
                                 null
                         )
