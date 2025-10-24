@@ -11,6 +11,7 @@ public class AdminMapper {
     private final UserMapper userMapper;
 
     public Admin toAdmin(AdminRequest request) {
+        request.isValid();
         return Admin.builder()
                 .name(request.getName())
                 .email(request.getEmail())
@@ -23,6 +24,7 @@ public class AdminMapper {
     }
 
     public Admin mergeForUpdateAdmin(Integer id, Admin existingAdmin, AdminRequest request) {
+        request.isValid();
         return Admin.builder()
                 .id(id)
                 .name(request.getName())

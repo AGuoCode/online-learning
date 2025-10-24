@@ -16,14 +16,12 @@ public class AdminServiceImpl implements IAdminService {
 
     @Override
     public Integer create(AdminRequest adminRequest) {
-        adminRequest.isValid();
         Admin admin = adminMapper.toAdmin(adminRequest);
         return adminRepository.save(admin).getId();
     }
 
     @Override
     public Integer update(Integer id, AdminRequest adminRequest) {
-        adminRequest.isValid();
         Admin existingAdmin = adminRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException(Admin.class, "id", id)
         );

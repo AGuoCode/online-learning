@@ -22,8 +22,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @DisplayName("Admin Service Test")
 public class AdminServiceImplTest {
-
-
+    
     @Mock
     private AdminRepository adminRepository;
 
