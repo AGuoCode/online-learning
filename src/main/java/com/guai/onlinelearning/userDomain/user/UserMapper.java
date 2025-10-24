@@ -17,7 +17,7 @@ public class UserMapper {
                 .username(email)
                 .password(passwordEncoder.encode(GenerateOTP.generateOTPCode(6)))
                 .role(role)
-                .enabled(true)
+                .enabled(true) // TODO currently enable user and enable by email verify later
                 .locked(false)
                 .build();
     }

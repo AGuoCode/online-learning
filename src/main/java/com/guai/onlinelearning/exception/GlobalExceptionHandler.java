@@ -1,6 +1,5 @@
 package com.guai.onlinelearning.exception;
 
-import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,19 +19,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(JwtException.class)
-    public ResponseEntity<ErrorResponse> handleException(JwtException ex) {
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(buildErrorResponse(
-                                StatusCode.UNAUTHORIZED,
-                                "Login Failed",
-                                ex.getMessage(),
-                                null
-                        )
-                );
-    }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleException(UsernameNotFoundException ex) {
@@ -91,7 +77,7 @@ public class GlobalExceptionHandler {
                     .status(HttpStatus.CONFLICT)
                     .body(buildErrorResponse(
                                     StatusCode.CONFLICT,
-                                    "A record with this unique value already exists.",
+                                    "Record already exists.",
                                     ex.getMessage(),
                                     null
                             )
