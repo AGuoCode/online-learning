@@ -21,9 +21,9 @@ import java.util.Collections;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 public class User extends BaseEntity implements UserDetails {
 
     @Column(nullable = false, unique = true, updatable = false)
