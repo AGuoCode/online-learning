@@ -16,6 +16,7 @@ public class AdminServiceImpl implements IAdminService {
 
     @Override
     public Integer create(AdminRequest adminRequest) {
+        adminRequest.isValid();
         Admin admin = adminMapper.toAdmin(adminRequest);
         return adminRepository.save(admin).getId();
     }
