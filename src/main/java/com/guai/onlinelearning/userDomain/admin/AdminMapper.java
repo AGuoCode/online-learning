@@ -18,9 +18,7 @@ public class AdminMapper {
                 .professional(request.getProfessional())
                 .bio(request.getBio())
                 .certificates(request.getCertificates())
-                .user(
-                        userMapper.toUser(request.getEmail(), request.getRole())
-                )
+                .user(userMapper.toUser(request.getEmail(), request.getRole()))
                 .build();
     }
 

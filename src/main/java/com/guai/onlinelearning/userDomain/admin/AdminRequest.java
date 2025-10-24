@@ -1,5 +1,6 @@
 package com.guai.onlinelearning.userDomain.admin;
 
+import com.guai.onlinelearning.exception.BusinessException;
 import com.guai.onlinelearning.userDomain.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,4 +30,10 @@ public class AdminRequest {
     private List<String> certificates;
     @NotNull(message = "Name cannot be empty.")
     private UserRole role;
+
+    public void isValid() {
+        if (!this.role.equals(UserRole.ADMIN)) {
+            throw new BusinessException("Invalid Role");
+        }
+    }
 }
