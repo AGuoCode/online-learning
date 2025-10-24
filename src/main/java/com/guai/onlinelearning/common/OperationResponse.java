@@ -21,15 +21,17 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({"statusCode", "status", "message", "timestamp", "data", "resList"})
 public class OperationResponse extends BaseResponse {
+    private Integer id;
     private Object data;
     private List<Object> dataList;
 
-    public static OperationResponse buildSuccessResponse(StatusCode statusCode, String successMessage, Object data, List<Object> dataList) {
+    public static OperationResponse buildSuccessResponse(StatusCode statusCode, String successMessage, Integer id, Object data, List<Object> dataList) {
         return OperationResponse.builder()
                 .statusCode(statusCode.getCode())
                 .status(statusCode.getMessage())
                 .message(successMessage)
                 .timestamp(LocalDateTime.now())
+                .id(id)
                 .data(data)
                 .dataList(dataList)
                 .build();
