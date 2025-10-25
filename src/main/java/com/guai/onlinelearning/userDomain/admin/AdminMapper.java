@@ -1,5 +1,6 @@
 package com.guai.onlinelearning.userDomain.admin;
 
+import com.guai.onlinelearning.exception.BusinessException;
 import com.guai.onlinelearning.userDomain.user.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class AdminMapper {
 
     public Admin mergeForUpdateAdmin(Integer id, Admin existingAdmin, AdminRequest request) {
         request.isValid();
+        checkEmail(existingAdmin.getEmail(), request.getEmail());
         return Admin.builder()
                 .id(id)
                 .name(request.getName())
@@ -48,5 +50,11 @@ public class AdminMapper {
                 .certificates(admin.getCertificates())
                 .user(userMapper.toUserResponse(admin.getUser()))
                 .build();
+    }
+
+    private void checkEmail(String oldEmail, String newEmail) {
+        if (!oldEmail.equals(newEmail)) {
+            throw new BusinessException("Changing or updating email is not supported.");
+        }
     }
 }
